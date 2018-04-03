@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <sqlcontroller.h>
 #include <QSettings>
@@ -11,8 +12,8 @@ int main(int argc, char *argv[])
 #endif
     SqlController *sql1 = new SqlController();
     sql1->CreateConnect();
-    QGuiApplication app(argc, argv);
-
+//    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/Boss_Form_1.qml")));
     if (engine.rootObjects().isEmpty())
