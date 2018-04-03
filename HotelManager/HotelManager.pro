@@ -15,7 +15,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     sqlcontroller.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+icons/gallery/index.theme \
+$$files(icons/*.png, true)
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
