@@ -1,34 +1,38 @@
+//![2]
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.1
 import QtQuick.Controls.Universal 2.1
 import Qt.labs.settings 1.0
+//![2]
+import QtCharts 2.0
 
 ApplicationWindow {
     id: window
-    width: 360
-    height: 520
+    width: 640
+    height: 480
     visible: true
-    title: "Qt Quick Controls 2"
+    title: "Hotel Management Software"
+    visibility: "Maximized"
 
-    Settings {
-        id: settings
-        property string style: "Default"
-    }
-    Shortcut {
-        sequences: ["Esc", "Back"]
-        enabled: stackView.depth > 1
-        onActivated: {
-            stackView.pop()
-            listView.currentIndex = -1
-        }
-    }
+//    Settings {
+//        id: settings
+//        property string style: "Default"
+//    }
+//    Shortcut {
+//        sequences: ["Esc", "Back"]
+//        enabled: stackView.depth > 1
+//        onActivated: {
+//            stackView.pop()
+//            listView.currentIndex = -1
+//        }
+//    }
 
-    Shortcut {
-        sequence: "Menu"
-        onActivated: optionsMenu.open()
-    }
+//    Shortcut {
+//        sequence: "Menu"
+//        onActivated: optionsMenu.open()
+//    }
 
     header: ToolBar {
         Material.foreground: "white"
@@ -51,7 +55,7 @@ ApplicationWindow {
 
             Label {
                 id: titleLabel
-                text: listView.currentItem ? listView.currentItem.text : "Gallery"
+                text: listView.currentItem ? listView.currentItem.text : "DashBoard"
                 font.pixelSize: 20
                 elide: Label.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
@@ -105,32 +109,37 @@ ApplicationWindow {
             }
 
             model: ListModel {
-                ListElement { title: "BusyIndicator"; source: "qrc:/pages/BusyIndicatorPage.qml" }
-                ListElement { title: "Button"; source: "qrc:/pages/ButtonPage.qml" }
-                ListElement { title: "CheckBox"; source: "qrc:/pages/CheckBoxPage.qml" }
-                ListElement { title: "ComboBox"; source: "qrc:/pages/ComboBoxPage.qml" }
-                ListElement { title: "DelayButton"; source: "qrc:/pages/DelayButtonPage.qml" }
-                ListElement { title: "Dial"; source: "qrc:/pages/DialPage.qml" }
-                ListElement { title: "Dialog"; source: "qrc:/pages/DialogPage.qml" }
-                ListElement { title: "Delegates"; source: "qrc:/pages/DelegatePage.qml" }
-                ListElement { title: "Frame"; source: "qrc:/pages/FramePage.qml" }
-                ListElement { title: "GroupBox"; source: "qrc:/pages/GroupBoxPage.qml" }
-                ListElement { title: "PageIndicator"; source: "qrc:/pages/PageIndicatorPage.qml" }
-                ListElement { title: "ProgressBar"; source: "qrc:/pages/ProgressBarPage.qml" }
-                ListElement { title: "RadioButton"; source: "qrc:/pages/RadioButtonPage.qml" }
-                ListElement { title: "RangeSlider"; source: "qrc:/pages/RangeSliderPage.qml" }
-                ListElement { title: "ScrollBar"; source: "qrc:/pages/ScrollBarPage.qml" }
-                ListElement { title: "ScrollIndicator"; source: "qrc:/pages/ScrollIndicatorPage.qml" }
-                ListElement { title: "Slider"; source: "qrc:/pages/SliderPage.qml" }
-                ListElement { title: "SpinBox"; source: "qrc:/pages/SpinBoxPage.qml" }
-                ListElement { title: "StackView"; source: "qrc:/pages/StackViewPage.qml" }
-                ListElement { title: "SwipeView"; source: "qrc:/pages/SwipeViewPage.qml" }
-                ListElement { title: "Switch"; source: "qrc:/pages/SwitchPage.qml" }
-                ListElement { title: "TabBar"; source: "qrc:/pages/TabBarPage.qml" }
-                ListElement { title: "TextArea"; source: "qrc:/pages/TextAreaPage.qml" }
-                ListElement { title: "TextField"; source: "qrc:/pages/TextFieldPage.qml" }
-                ListElement { title: "ToolTip"; source: "qrc:/pages/ToolTipPage.qml" }
-                ListElement { title: "Tumbler"; source: "qrc:/pages/TumblerPage.qml" }
+//                ListElement { title: "BusyIndicator"; source: "qrc:/pages/BusyIndicatorPage.qml" }
+//                ListElement { title: "Button"; source: "qrc:/pages/ButtonPage.qml" }
+//                ListElement { title: "CheckBox"; source: "qrc:/pages/CheckBoxPage.qml" }
+//                ListElement { title: "ComboBox"; source: "qrc:/pages/ComboBoxPage.qml" }
+//                ListElement { title: "DelayButton"; source: "qrc:/pages/DelayButtonPage.qml" }
+//                ListElement { title: "Dial"; source: "qrc:/pages/DialPage.qml" }
+//                ListElement { title: "Dialog"; source: "qrc:/pages/DialogPage.qml" }
+//                ListElement { title: "Delegates"; source: "qrc:/pages/DelegatePage.qml" }
+//                ListElement { title: "Frame"; source: "qrc:/pages/FramePage.qml" }
+//                ListElement { title: "GroupBox"; source: "qrc:/pages/GroupBoxPage.qml" }
+//                ListElement { title: "PageIndicator"; source: "qrc:/pages/PageIndicatorPage.qml" }
+//                ListElement { title: "ProgressBar"; source: "qrc:/pages/ProgressBarPage.qml" }
+//                ListElement { title: "RadioButton"; source: "qrc:/pages/RadioButtonPage.qml" }
+//                ListElement { title: "RangeSlider"; source: "qrc:/pages/RangeSliderPage.qml" }
+//                ListElement { title: "ScrollBar"; source: "qrc:/pages/ScrollBarPage.qml" }
+//                ListElement { title: "ScrollIndicator"; source: "qrc:/pages/ScrollIndicatorPage.qml" }
+//                ListElement { title: "Slider"; source: "qrc:/pages/SliderPage.qml" }
+//                ListElement { title: "SpinBox"; source: "qrc:/pages/SpinBoxPage.qml" }
+//                ListElement { title: "StackView"; source: "qrc:/pages/StackViewPage.qml" }
+//                ListElement { title: "SwipeView"; source: "qrc:/pages/SwipeViewPage.qml" }
+//                ListElement { title: "Switch"; source: "qrc:/pages/SwitchPage.qml" }
+//                ListElement { title: "TabBar"; source: "qrc:/pages/TabBarPage.qml" }
+//                ListElement { title: "TextArea"; source: "qrc:/pages/TextAreaPage.qml" }
+//                ListElement { title: "TextField"; source: "qrc:/pages/TextFieldPage.qml" }
+//                ListElement { title: "ToolTip"; source: "qrc:/pages/ToolTipPage.qml" }
+//                ListElement { title: "Tumbler"; source: "qrc:/pages/TumblerPage.qml" }
+                ListElement { title: "Dashboard"; }
+                ListElement { title: "Reports"; }
+                ListElement { title: "Employees"; }
+                ListElement { title: "Hotels"; }
+                ListElement { title: "Products"; }
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }
@@ -143,11 +152,45 @@ ApplicationWindow {
 
         initialItem: Pane
         {
-            Label
-            {
-                text: "This is hotel management software"
-                wrapMode: Label.Wrap
+//            Label
+//            {
+//                text: "This is hotel management software"
+//                wrapMode: Label.Wrap
+//            }
+            GridLayout{
+                id: grid
+                columns: 2
+                visible: true
+                anchors.fill: parent
+                Item {
+                    id: item1
+                    anchors.fill: parent
+                    property variant othersSlice: 0
+                    ChartView {
+                        id: chart
+                        title: "Incomes"
+                        anchors.fill: parent
+                        legend.alignment: Qt.AlignBottom
+                        antialiasing: true
+
+                        PieSeries {
+                            id: pieSeries
+                            PieSlice { label: "Incomes"; value: 10 }
+                            PieSlice { label: "OutComes"; value: 90 }
+                        }
+                    }
+                }
             }
+
+        }
+    }
+
+    footer: ToolBar
+    {
+        Text {
+            id: txtStatus
+            text: qsTr("connect")
         }
     }
 }
+
