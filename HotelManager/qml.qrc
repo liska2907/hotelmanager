@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Boss_Form_1.qml</file>
     </qresource>
 </RCC>
