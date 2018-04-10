@@ -10,11 +10,16 @@ import QtCharts 2.0
 
 ApplicationWindow {
     id: window
-    width: 640
-    height: 480
+//    width: 640
+//    height: 480
     visible: true
     title: "Hotel Management Software"
     visibility: "Maximized"
+    property int margin: 11
+    width: mainLayout.implicitWidth + 2 * margin
+    height: mainLayout.implicitHeight + 2 * margin
+    minimumWidth: mainLayout.Layout.minimumWidth + 2 * margin
+    minimumHeight: mainLayout.Layout.minimumHeight + 2 * margin
 
 //    Settings {
 //        id: settings
@@ -150,38 +155,113 @@ ApplicationWindow {
         id: stackView
         anchors.fill: parent
 
-        initialItem: Pane
-        {
-//            Label
-//            {
-//                text: "This is hotel management software"
-//                wrapMode: Label.Wrap
-//            }
-            GridLayout{
-                id: grid
-                columns: 2
-                visible: true
-                anchors.fill: parent
-                Item {
-                    id: item1
-                    anchors.fill: parent
-                    property variant othersSlice: 0
-                    ChartView {
-                        id: chart
-                        title: "Incomes"
-                        anchors.fill: parent
-                        legend.alignment: Qt.AlignBottom
-                        antialiasing: true
+        ColumnLayout{
+            id: mainLayout
+            anchors.fill: parent
+            anchors.margins: margin
+            GroupBox {
+                id: rowBox
+                title: "Information"
+                Layout.fillWidth: true
 
-                        PieSeries {
-                            id: pieSeries
-                            PieSlice { label: "Incomes"; value: 10 }
-                            PieSlice { label: "OutComes"; value: 90 }
-                        }
+                RowLayout {
+                    id: rowLayoutInformation
+                    anchors.fill: parent
+                    Text
+                    {
+                        text: qsTr("Hello Mr. Dinh Quang Thu");
                     }
                 }
             }
 
+            GroupBox{
+                id: chartBox
+                title: "Charts"
+                Layout.fillWidth: true
+
+                GridLayout{
+                    id: gridLayoutCharts
+                    rows: 1
+                    flow: GridLayout.TopToBottom
+                    anchors.fill: parent
+                    Rectangle{
+                        width: 100
+                        height: 600
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+//                        color: "red"
+                        Item {
+                            id: item1
+                            anchors.fill: parent
+                            property variant othersSlice: 0
+                            ChartView {
+                                id: chart
+                                title: "Incomes"
+                                anchors.fill: parent
+                                legend.alignment: Qt.AlignBottom
+                                antialiasing: true
+
+                                PieSeries {
+                                    PieSlice { label: "Incomes"; value: 10 }
+                                    PieSlice { label: "OutComes"; value: 90 }
+                                }
+                            }
+                        }
+                    }
+                    Rectangle{
+                        width: 100
+                        height: 600
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+//                        color: "red"
+                        Item {
+                            id: item2
+                            anchors.fill: parent
+                            property variant othersSlice: 0
+                            ChartView {
+                                id: chart1
+                                title: "Incomes"
+                                anchors.fill: parent
+                                legend.alignment: Qt.AlignBottom
+                                antialiasing: true
+
+                                HorizontalBarSeries {
+                                    axisY: BarCategoryAxis { categories: ["2007", "2008", "2009", "2010", "2011", "2012" ] }
+                                    BarSet { label: "Bob"; values: [2, 2, 3, 4, 5, 6] }
+                                    BarSet { label: "Susan"; values: [5, 1, 2, 4, 1, 7] }
+                                    BarSet { label: "James"; values: [3, 5, 8, 13, 5, 8] }
+                                }
+                            }
+                        }
+                    }
+                    Rectangle{
+                        width: 100
+                        height: 600
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+//                        color: "red"
+                        Item {
+                            id: item3
+                            anchors.fill: parent
+                            property variant othersSlice: 0
+                            ChartView {
+                                id: chart2
+                                title: "Incomes"
+                                anchors.fill: parent
+                                legend.alignment: Qt.AlignBottom
+                                antialiasing: true
+
+                                BarSeries {
+                                    axisX: BarCategoryAxis { categories: ["2007", "2008", "2009", "2010", "2011", "2012" ] }
+                                    BarSet { label: "Bob"; values: [2, 2, 3, 4, 5, 6] }
+                                    BarSet { label: "Susan"; values: [5, 1, 2, 4, 1, 7] }
+                                    BarSet { label: "James"; values: [3, 5, 8, 13, 5, 8] }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
