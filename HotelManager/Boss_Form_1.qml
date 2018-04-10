@@ -1,17 +1,17 @@
 //![2]
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 1.4
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.1
 import QtQuick.Controls.Universal 2.1
 import Qt.labs.settings 1.0
+import QtQuick.Controls.Styles 1.4
 //![2]
 import QtCharts 2.0
 
 ApplicationWindow {
     id: window
-//    width: 640
-//    height: 480
     visible: true
     title: "Hotel Management Software"
     visibility: "Maximized"
@@ -21,23 +21,6 @@ ApplicationWindow {
     minimumWidth: mainLayout.Layout.minimumWidth + 2 * margin
     minimumHeight: mainLayout.Layout.minimumHeight + 2 * margin
 
-//    Settings {
-//        id: settings
-//        property string style: "Default"
-//    }
-//    Shortcut {
-//        sequences: ["Esc", "Back"]
-//        enabled: stackView.depth > 1
-//        onActivated: {
-//            stackView.pop()
-//            listView.currentIndex = -1
-//        }
-//    }
-
-//    Shortcut {
-//        sequence: "Menu"
-//        onActivated: optionsMenu.open()
-//    }
 
     header: ToolBar {
         Material.foreground: "white"
@@ -115,31 +98,6 @@ ApplicationWindow {
 
             model: ListModel {
 //                ListElement { title: "BusyIndicator"; source: "qrc:/pages/BusyIndicatorPage.qml" }
-//                ListElement { title: "Button"; source: "qrc:/pages/ButtonPage.qml" }
-//                ListElement { title: "CheckBox"; source: "qrc:/pages/CheckBoxPage.qml" }
-//                ListElement { title: "ComboBox"; source: "qrc:/pages/ComboBoxPage.qml" }
-//                ListElement { title: "DelayButton"; source: "qrc:/pages/DelayButtonPage.qml" }
-//                ListElement { title: "Dial"; source: "qrc:/pages/DialPage.qml" }
-//                ListElement { title: "Dialog"; source: "qrc:/pages/DialogPage.qml" }
-//                ListElement { title: "Delegates"; source: "qrc:/pages/DelegatePage.qml" }
-//                ListElement { title: "Frame"; source: "qrc:/pages/FramePage.qml" }
-//                ListElement { title: "GroupBox"; source: "qrc:/pages/GroupBoxPage.qml" }
-//                ListElement { title: "PageIndicator"; source: "qrc:/pages/PageIndicatorPage.qml" }
-//                ListElement { title: "ProgressBar"; source: "qrc:/pages/ProgressBarPage.qml" }
-//                ListElement { title: "RadioButton"; source: "qrc:/pages/RadioButtonPage.qml" }
-//                ListElement { title: "RangeSlider"; source: "qrc:/pages/RangeSliderPage.qml" }
-//                ListElement { title: "ScrollBar"; source: "qrc:/pages/ScrollBarPage.qml" }
-//                ListElement { title: "ScrollIndicator"; source: "qrc:/pages/ScrollIndicatorPage.qml" }
-//                ListElement { title: "Slider"; source: "qrc:/pages/SliderPage.qml" }
-//                ListElement { title: "SpinBox"; source: "qrc:/pages/SpinBoxPage.qml" }
-//                ListElement { title: "StackView"; source: "qrc:/pages/StackViewPage.qml" }
-//                ListElement { title: "SwipeView"; source: "qrc:/pages/SwipeViewPage.qml" }
-//                ListElement { title: "Switch"; source: "qrc:/pages/SwitchPage.qml" }
-//                ListElement { title: "TabBar"; source: "qrc:/pages/TabBarPage.qml" }
-//                ListElement { title: "TextArea"; source: "qrc:/pages/TextAreaPage.qml" }
-//                ListElement { title: "TextField"; source: "qrc:/pages/TextFieldPage.qml" }
-//                ListElement { title: "ToolTip"; source: "qrc:/pages/ToolTipPage.qml" }
-//                ListElement { title: "Tumbler"; source: "qrc:/pages/TumblerPage.qml" }
                 ListElement { title: "Dashboard"; }
                 ListElement { title: "Reports"; }
                 ListElement { title: "Employees"; }
@@ -175,9 +133,87 @@ ApplicationWindow {
             }
 
             GroupBox{
+                id: comboBox
+                title: "ComboBox"
+                height: 10
+                Layout.fillWidth: true
+                RowLayout{
+                    ComboBox{
+                        editable: true
+                        model: ListModel {
+                            id: model
+                            ListElement { text: "Banana" }
+                            ListElement { text: "Apple" }
+                            ListElement { text: "Coconut" }
+                        }
+                        onAccepted: {
+                            if (find(editText) === -1)
+                                model.append({text: editText})
+                        }
+                    }
+                    Label{
+                        text: qsTr("From:")
+                    }
+
+                    TextField{
+                        id: textDateFrom
+                        activeFocusOnPress: false
+                        placeholderText: qsTr("Date")
+                        text: textDateFrom.text = Qt.formatDate(calFrom.selectedDate, "dd/MM/yyyy")
+                    }
+
+                    ToolButton{
+                        icon.source: "qrc:/icons/gallery/20x20/calendar.png"
+                        onClicked: {
+                            calFrom.visible = true
+                        }
+                    }
+
+                    Calendar{
+                        id: calFrom
+                        visible: false
+                        selectedDate: new Date()
+                        onClicked: {
+                            textDateFrom.text = Qt.formatDate(calFrom.selectedDate, "dd/MM/yyyy");
+                            calFrom.visible = false
+                        }
+                    }
+
+                    Label{
+                        text: qsTr("To:")
+                    }
+
+                    TextField{
+                        id: textDateTo
+                        activeFocusOnPress: false
+                        placeholderText: qsTr("Date")
+                        text: textDateTo.text = Qt.formatDate(calTo.selectedDate, "dd/MM/yyyy")
+                    }
+
+                    ToolButton{
+                        icon.source: "qrc:/icons/gallery/20x20/calendar.png"
+                        onClicked: {
+                            calTo.visible = true
+                        }
+                    }
+
+                    Calendar{
+                        id: calTo
+                        visible: false
+                        selectedDate: new Date()
+                        onClicked: {
+                            textDateTo.text = Qt.formatDate(calTo.selectedDate, "dd/MM/yyyy");
+                            calTo.visible = false
+                        }
+                    }
+                }
+            }
+
+            GroupBox{
                 id: chartBox
                 title: "Charts"
                 Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 GridLayout{
                     id: gridLayoutCharts
@@ -186,10 +222,9 @@ ApplicationWindow {
                     anchors.fill: parent
                     Rectangle{
                         width: 100
-                        height: 600
+                        height: 100
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-//                        color: "red"
                         Item {
                             id: item1
                             anchors.fill: parent
@@ -210,7 +245,7 @@ ApplicationWindow {
                     }
                     Rectangle{
                         width: 100
-                        height: 600
+                        height: 100
                         Layout.fillHeight: true
                         Layout.fillWidth: true
 //                        color: "red"
@@ -236,7 +271,7 @@ ApplicationWindow {
                     }
                     Rectangle{
                         width: 100
-                        height: 600
+                        height: 100
                         Layout.fillHeight: true
                         Layout.fillWidth: true
 //                        color: "red"
@@ -264,7 +299,6 @@ ApplicationWindow {
             }
         }
     }
-
     footer: ToolBar
     {
         Text {
@@ -273,4 +307,5 @@ ApplicationWindow {
         }
     }
 }
+
 
